@@ -49,14 +49,20 @@ public class MemberServiceImpl implements MemberService{
 		//   MemberServiceImpl에   부모인터페이스(MemberDAO) 변수(멤버변수)에 set,생성자 통해서 전달
 		//   insertMember(memberDTO) 메서드 호출
 		
-		// 현 시스템 날짜 저장
+		//  현 시스템 날짜 저장
 		memberDTO.setDate(new Timestamp(System.currentTimeMillis()));
 		
 		memberDAO.insertMember(memberDTO);
 		
-	
 	}
 
+	@Override
+	public MemberDTO userCheck(MemberDTO memberDTO) {
+		
+		return memberDAO.userCheck(memberDTO);
+	}
+
+	
 
 	
 	

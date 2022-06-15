@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +23,7 @@ public class MemberController {
 	//    MemberController에서 MemberServiceImpl파일 필요로 해서 객체생성 메서드호출
 	//	  MemberController에서 MemberServiceImpl파일 의존해서 객체생성 메서드호출
 	//    MemberController는 MemberServiceImpl에 의존하는 관계(의존관계)
-	//    xml MemberServiceImpl객체생성 MemberController 전달(의존관계 주입:DI(Dependency Injection)
+	//    xml MemberServiceImpl객체생성 MemberController 전달(의존관계 주입:DI(Dependency Injection))
 	
 	
 	//   root-context.xml  MemberServiceImpl 객체생성
@@ -131,10 +132,19 @@ public class MemberController {
 	
 	//  /member/loginPro POST => /member/main 가상주소 이동
 	@RequestMapping(value = "/member/loginPro", method = RequestMethod.POST)
-	public String loginPro() {
+	public String loginPro(MemberDTO memberDTO,HttpSession session) {
 		System.out.println("MemberController loginPro()");
+		System.out.println(memberDTO.getId());
+		System.out.println(memberDTO.getPass());
+		//로그인 처리
+		MemberDTO memberDTO2=memberService.userCheck(memberDTO);
+		if(memberDTO2!=null) {
+			//세션값 생성
+			session.setAttribute("id", memberDTO.getId());
+		}
 		return "redirect:/member/main";
 	}
+	
     //  /member/main     GET  => /member/main.jsp 이동
 	@RequestMapping(value = "/member/main", method = RequestMethod.GET)
 	public String main() {
