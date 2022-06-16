@@ -1,4 +1,4 @@
-package com.jangwon.board.domain;
+package com.jangwon.board.domain.entity;
 
 import lombok.AccessLevel;
 import lombok.Builder;
