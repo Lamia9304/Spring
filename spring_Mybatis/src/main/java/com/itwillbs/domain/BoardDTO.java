@@ -12,9 +12,16 @@ public class BoardDTO {
 	 private Timestamp date;
 	 //파일
 	 private String file;
+	 private int comment_count;
 	 	 
 	// alt shift s => r
 	  
+	public int getComment_count() {
+		return comment_count;
+	}
+	public void setComment_count(int comment_count) {
+		this.comment_count = comment_count;
+	}
 	public String getFile() {
 		return file;
 	}
