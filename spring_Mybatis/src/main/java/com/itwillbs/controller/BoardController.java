@@ -74,15 +74,21 @@ public class BoardController {
 	
 	//http://localhost:8080/myweb2/board/content?num=2
 	@RequestMapping(value = "/board/content", method = RequestMethod.GET)
-	public String content(HttpServletRequest request,Model model) {
+	public String content(HttpServletRequest request, Model model) {
 		int num= Integer.parseInt(request.getParameter("num"));
 		
 		BoardDTO boardDTO=boardService.getBoard(num);
-		model.addAttribute("boardDTO",boardDTO);
+		
+		model.addAttribute("boardDTO", boardDTO);
 		
 		// /WEB-INF/views/board/content.jsp
 		return "board/content";
 	}
 	
+	@RequestMapping(value = "/board/fwrite", method = RequestMethod.GET)
+	public String finsert() {
+		// /WEB-INF/views/board/fwriteForm.jsp
+		return "board/fwriteForm";
+	}
 	
 }
