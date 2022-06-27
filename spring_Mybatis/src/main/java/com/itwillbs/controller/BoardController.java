@@ -1,14 +1,19 @@
 package com.itwillbs.controller;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.domain.BoardDTO;
 import com.itwillbs.domain.PageDTO;
@@ -19,6 +24,10 @@ public class BoardController {
 	
 	@Inject
 	private BoardService boardService;
+	
+	@Resource(name= "uploadPath")
+	private String uploadPath;
+	
 
 	@RequestMapping(value = "/board/write", method = RequestMethod.GET)
 	public String insert() {
@@ -89,6 +98,32 @@ public class BoardController {
 	public String finsert() {
 		// /WEB-INF/views/board/fwriteForm.jsp
 		return "board/fwriteForm";
+	}
+	
+	@RequestMapping(value = "/board/fwritePro", method = RequestMethod.POST)
+	public String fwritePro(HttpServletRequest request, MultipartFile file) throws Exception {
+		BoardDTO boardDTO=new BoardDTO();
+		boardDTO.setName(request.getParameter("name"));
+		boardDTO.setPass(request.getParameter("pass"));
+		boardDTO.setSubject(request.getParameter("subject"));
+		boardDTO.setContent(request.getParameter("content"));
+		// 프로그램 설치 fileupload , commons-io, annotation-api
+		// 설정
+		
+		// 파일이름 => 랜덤문자_파일이름
+		UUID uuid=UUID.randomUUID();
+		String fileName=uuid.toString()+"_"+file.getOriginalFilename();
+		// 업로드 파일을 => resources/upload 폴더 복사
+		File uploadFile=new File(uploadPath,fileName);
+		FileCopyUtils.copy(file.getBytes(), uploadFile);
+		
+		
+		boardDTO.setFile(fileName);
+		
+		//디비 insert
+		boardService.insertBoard(boardDTO);
+		
+		return "redirect:/board/list";
 	}
 	
 }

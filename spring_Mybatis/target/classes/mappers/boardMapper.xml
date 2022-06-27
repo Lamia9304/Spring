@@ -6,8 +6,8 @@
 
 
 	<insert id="insertBoard">
-		insert into board(num,name,pass,subject,content,readcount,date) 
-		values(#{num},#{name},#{pass},#{subject},#{content},#{readcount},#{date})
+		insert into board(num,name,pass,subject,content,readcount,date,file) 
+		values(#{num},#{name},#{pass},#{subject},#{content},#{readcount},#{date},#{file})
 	</insert>
 
 	<select id="getMaxNum" resultType="java.lang.Integer">
