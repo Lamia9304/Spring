@@ -23,8 +23,7 @@
 	</select>
 	
 	<select id="getBoard" resultType="com.itwillbs.domain.BoardDTO">
-		select *from board where num=#{num}
+		select * from board where num=#{num}
 	</select>
-	
 
 </mapper>
