@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,7 +6,7 @@
 <meta charset="UTF-8">
 <title>member/update.jsp</title>
 <link href="${pageContext.request.contextPath}/resources/css/default.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath}/resources/css/subpage.css" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/subpage.css" rel="stylesheet" type="text/css">
 <!--[if lt IE 9]>
 <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js" type="text/javascript"></script>
 <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/ie7-squish.js" type="text/javascript"></script>
@@ -42,31 +41,30 @@
 </nav>
 <!-- 왼쪽메뉴 -->
 <!-- 본문내용 -->
-
 <article>
 <h1>Update Us</h1>
 <form action="${pageContext.request.contextPath}/member/updatePro" id="join" method="post">
 <fieldset>
 <legend>Basic Info</legend>
 <label>User ID</label>
-<input type="text" name="id" class="id" value="${membeDTO.id}" readonly>
+<input type="text" name="id" class="id" value="${memberDTO.id }" readonly>
 <input type="button" value="dup. check" class="dup"><br>
 <label>Password</label>
-<input type="password" name="pass" value="${membeDTO.pass}"><br>
+<input type="password" name="pass"><br>
 <label>Name</label>
-<input type="text" name="name" value="${membeDTO.name}"><br>
+<input type="text" name="name" value="${memberDTO.name }"><br>
 <label>E-Mail</label>
-<input type="email" name="email" value="${membeDTO.email}"><br>
+<input type="email" name="email" value="${memberDTO.email }"><br>
 </fieldset>
 
 <fieldset>
 <legend>Optional</legend>
 <label>Address</label>
-<input type="text" name="address" value="${membeDTO.address}"><br>
+<input type="text" name="address" value="${memberDTO.address }"><br>
 <label>Phone Number</label>
-<input type="text" name="phone" value="${membeDTO.phone}"><br>
+<input type="text" name="phone" value="${memberDTO.phone }"><br>
 <label>Mobile Phone Number</label>
-<input type="text" name="mobile" value="${membeDTO.mobile}"><br>
+<input type="text" name="mobile" value="${memberDTO.mobile }"><br>
 </fieldset>
 <div class="clear"></div>
 <div id="buttons">

@@ -21,7 +21,7 @@
 	</update>
 	
 	<select id="getMemberList" resultType="com.itwillbs.domain.MemberDTO">
-	select * from member;
-	 </select>
+		select * from member
+	</select>
 
 </mapper>

@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="../css/default.css" rel="stylesheet" type="text/css">
-<link href="../css/subpage.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/default.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/subpage.css" rel="stylesheet" type="text/css">
 <!--[if lt IE 9]>
 <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js" type="text/javascript"></script>
 <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/ie7-squish.js" type="text/javascript"></script>
@@ -36,28 +37,31 @@
 <!-- 왼쪽메뉴 -->
 <nav id="sub_menu">
 <ul>
-<li><a href="../center/notice.jsp">Notice</a></li>
+<li><a href="${pageContext.request.contextPath}/board/list">Notice</a></li>
 <li><a href="#">Public News</a></li>
-<li><a href="../fcenter/fnotice.jsp">Driver Download</a></li>
+<li><a href="${pageContext.request.contextPath}/fboard/flist">Driver Download</a></li>
 <li><a href="#">Service Policy</a></li>
 </ul>
 </nav>
 <!-- 왼쪽메뉴 -->
 <!-- 게시판 -->
 <%
-//세션값 가져오기
-String id=(String)session.getAttribute("id");
-// 세션값이 없으면 (id null 이면 ) login.jsp 이동
-if(id==null){
-	response.sendRedirect("../member/login.jsp");
-}
+// //세션값 가져오기
+// String id=(String)session.getAttribute("id");
+// // 세션값이 없으면 (id null 이면 ) login.jsp 이동
+// if(id==null){
+// // 	response.sendRedirect("../member/login.jsp");
+// }
 %>
+<c:if test="${ empty sessionScope.id }">
+	<c:redirect url="/member/login"></c:redirect>
+</c:if>
 <article>
 <h1>Notice Write</h1>
-<form action="writePro.jsp" method="post">
+<form action="${pageContext.request.contextPath}/board/writePro" method="post">
 <input type="hidden" name="pass" value="1111">
 <table id="notice">
-<tr><td>작성자</td><td><input type="text" name="name" value="<%=id %>" readonly></td></tr>
+<tr><td>작성자</td><td><input type="text" name="name" value="${sessionScope.id }" readonly></td></tr>
 <tr><td>제목</td><td><input type="text" name="subject"></td></tr>
 <tr><td>내용</td>
     <td><textarea name="content" rows="10" cols="20"></textarea></td></tr>

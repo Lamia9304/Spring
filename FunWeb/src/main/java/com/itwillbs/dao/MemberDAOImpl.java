@@ -37,11 +37,10 @@ public class MemberDAOImpl implements MemberDAO{
 	public void updateMember(MemberDTO memberDTO) {
 		sqlSession.update(namespace+".updateMember", memberDTO);
 	}
-	
+
 	@Override
 	public List<MemberDTO> getMemberList() {
-		
-		return sqlSession.selectList(namespace+".getMemberList()");
+		return sqlSession.selectList(namespace+".getMemberList");
 	}
 
 }

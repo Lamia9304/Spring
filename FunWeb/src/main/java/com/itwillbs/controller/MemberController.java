@@ -13,59 +13,55 @@ import com.itwillbs.service.MemberService;
 
 @Controller
 public class MemberController {
-	// 객체생성
+	//객체생성
 	@Inject
 	private MemberService memberService;
 
 	@RequestMapping(value = "/member/insert", method = RequestMethod.GET)
 	public String insert() {
-
+		
 		// /WEB-INF/views/member/join.jsp
 		return "member/join";
 	}
-
+	
 	@RequestMapping(value = "/member/insertPro", method = RequestMethod.POST)
 	public String insertPro(MemberDTO memberDTO) {
-		// 디비 insertMember() 메서드호출
-
-		memberService.insertMember(memberDTO);
-
-		return "redirect:/member/login";
-	}
-
-	@RequestMapping(value = "/member/insertPro", method = RequestMethod.POST)
-	public String login(MemberDTO memberDTO) {
-		// 디비 insertMember() 메서드호출
-
-		memberService.insertMember(memberDTO);
-
-		return "member/loginPro";
-	}
-
-	@RequestMapping(value = "/member/loginPro", method = RequestMethod.POST)
-	public String loginPro(MemberDTO memberDTO,HttpSession session) {
 		//디비 insertMember() 메서드호출
 		
+		memberService.insertMember(memberDTO);
+		
+		return "redirect:/member/login";
+	}
+	
+	@RequestMapping(value = "/member/login", method = RequestMethod.GET)
+	public String login() {
+		
+		// /WEB-INF/views/member/login.jsp
+		return "member/login";
+	}
+	
+	@RequestMapping(value = "/member/loginPro", method = RequestMethod.POST)
+	public String loginPro(MemberDTO memberDTO,HttpSession session) {
+		
 		MemberDTO memberDTO2=memberService.userCheck(memberDTO);
+		
 		if(memberDTO2!=null) {
-			//아이디 비밀번호 일치
-			//세션값 생성 "id", id
-			
+			//아이디 비밀번호 일치 
+			//세션값 생성 "id",id
 			session.setAttribute("id", memberDTO.getId());
 			return "redirect:/main/main";
 		}else {
-			// 아이디 비밀번호 틀림 뒤로 이동
-			return "member/msg";
+			//아이디 비밀번호 틀림 뒤로이동
+			return "member/msg"; 
 		}
 	}
-
-	@RequestMapping(value = "/main/main", method = RequestMethod.GET)
-	public String main(MemberDTO memberDTO, HttpSession session) {
-		
-		return "main/main";
-
-	}
 	
+	@RequestMapping(value = "/main/main", method = RequestMethod.GET)
+	public String main() {
+		
+		// /WEB-INF/views/main/main.jsp
+		return "main/main";
+	}
 	
 	@RequestMapping(value = "/member/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
@@ -75,17 +71,15 @@ public class MemberController {
 		return "redirect:/main/main";
 	}
 	
-	
-	
 	@RequestMapping(value = "/member/update", method = RequestMethod.GET)
 	public String update(HttpSession session,Model model) {
-		
 		String id=(String)session.getAttribute("id");
 		
-		MemberDTO memberDTO = memberService.getMember(id);
+		MemberDTO memberDTO=memberService.getMember(id);
 		
-		model.addAttribute("memberDTO",memberDTO);
+		model.addAttribute("memberDTO", memberDTO);
 		
+		// /WEB-INF/views/member/update.jsp
 		return "member/update";
 	}
 	
@@ -94,18 +88,23 @@ public class MemberController {
 		
 		MemberDTO memberDTO2=memberService.userCheck(memberDTO);
 		
-		if(memberDTO2!=null){
-		
+		if(memberDTO2!=null) {
+			//아이디 비밀번호 일치 
+			//수정
 			memberService.updateMember(memberDTO);
-			
-		return "redirect:/main/main";
-		
-		}else{
-			return "member/msg";
+			return "redirect:/main/main";
+		}else {
+			//아이디 비밀번호 틀림 뒤로이동
+			return "member/msg"; 
 		}
-		
-		
 	}
-
-
+	
+	@RequestMapping(value = "/member/list", method = RequestMethod.GET)
+	public String list() {
+		
+		// /WEB-INF/views/member/list.jsp
+		return "member/list";
+	}
+	
+	
 }

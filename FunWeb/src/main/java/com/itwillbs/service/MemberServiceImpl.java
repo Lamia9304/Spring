@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.dao.MemberDAO;
@@ -39,7 +38,6 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public List<MemberDTO> getMemberList() {
-		
 		return memberDAO.getMemberList();
 	}
 

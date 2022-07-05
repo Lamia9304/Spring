@@ -45,6 +45,8 @@ public class AjaxController {
 		ResponseEntity<List<MemberDTO>> entity=null;
 				
 		List<MemberDTO> memberList=memberService.getMemberList();
+		
+		// List<MemberDTO> => json 형으로 변경하는 프로그램 설치 (jackson-databind) 
 
 		entity=new ResponseEntity<List<MemberDTO>>(memberList,HttpStatus.OK);
 		return entity;
