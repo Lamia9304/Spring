@@ -40,5 +40,9 @@ public class MemberServiceImpl implements MemberService{
 	public List<MemberDTO> getMemberList() {
 		return memberDAO.getMemberList();
 	}
+	
+	public MemberDTO getMember2(String email) {
+		return memberDAO.getMember2(email);
+	}
 
 }

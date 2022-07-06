@@ -77,6 +77,7 @@ public class MemberController {
 		
 		MemberDTO memberDTO=memberService.getMember(id);
 		
+		
 		model.addAttribute("memberDTO", memberDTO);
 		
 		// /WEB-INF/views/member/update.jsp
@@ -105,6 +106,21 @@ public class MemberController {
 		// /WEB-INF/views/member/list.jsp
 		return "member/list";
 	}
+	
+	@RequestMapping(value = "/test/test1", method = RequestMethod.GET)
+	public String test1() {
+		
+		// /WEB-INF/views/member/list.jsp
+		return "test/test1";
+	}
+	
+	@RequestMapping(value = "/test/test2", method = RequestMethod.GET)
+	public String test2() {
+		
+		// /WEB-INF/views/member/list.jsp
+		return "test/test2";
+	}
+	
 	
 	
 }

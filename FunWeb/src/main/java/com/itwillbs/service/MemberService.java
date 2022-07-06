@@ -14,6 +14,9 @@ public interface MemberService {
 //	MemberDTO memberDTO=memberService.getMember(id);
 	public MemberDTO getMember(String id);
 	
+	public MemberDTO getMember2(String email);
+	
+	
 //	memberService.updateMember(memberDTO);
 	public void updateMember(MemberDTO memberDTO);
 	
